@@ -60,3 +60,14 @@ def copyfile(src, dst):
         shutil.copyfile(src, dst)
     except Exception as e:
         print(e)
+
+def clean_tempfiles(tmp_init=True):
+    if os.path.isdir('./tmp'):   
+        shutil.rmtree('./tmp')
+    if tmp_init:
+        os.makedirs('./tmp')
+        os.makedirs('./tmp/video_voice')
+        os.makedirs('./tmp/music/')
+        os.makedirs('./tmp/video_imgs')
+        os.makedirs('./tmp/vid2img')
+        os.makedirs('./tmp/output_imgs')
