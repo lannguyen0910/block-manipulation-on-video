@@ -11,3 +11,19 @@ def traversal(file_dir):
             traversal(dir)
     
     return file_list
+
+def is_img(path):
+    ext = os.path.splitext(path)[1]
+    ext = ext.lower()
+    if ext in ['.jpg', '.jpeg', '.png', '.bmp']:
+        return True
+    
+    return False
+
+def is_imgs(paths):
+    tmp = []
+    for path in paths:
+        if is_img(path):
+            tmp.append(path)
+    
+    return tmp
