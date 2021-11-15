@@ -54,3 +54,9 @@ def makedirs(path):
     else:
         os.makedirs(path)
         print('Makedir: ',path)
+
+def copyfile(src,dst):
+    try:
+        shutil.copyfile(src, dst)
+    except Exception as e:
+        print(e)
