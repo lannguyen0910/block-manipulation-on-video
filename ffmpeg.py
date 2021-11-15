@@ -48,3 +48,10 @@ def video2image(videopath, imagepath, fps=0, start_time='00:00:00', last_time='0
         args += ['-r', str(fps)]
     args += ['-f', 'image2','-q:v','-0',imagepath]
     run(args)
+
+def image2video(fps,imagepath,voicepath,videopath):
+    if voicepath != None:
+        os.system('ffmpeg -y -r '+str(fps)+' -i '+imagepath+' -vcodec libx264 '+'./tmp/video_tmp.mp4')
+        os.system('ffmpeg -i ./tmp/video_tmp.mp4 -i "'+voicepath+'" -vcodec copy -acodec aac '+videopath)
+    else:
+        os.system('ffmpeg -y -r '+str(fps)+' -i '+imagepath+' -vcodec libx264 '+videopath)
