@@ -27,3 +27,18 @@ def is_imgs(paths):
             tmp.append(path)
     
     return tmp
+
+def is_video(path):
+    ext = os.path.splitext(path)[1]
+    ext = ext.lower()
+    if ext in ['.mp4','.flv','.avi','.mov','.mkv','.wmv','.rmvb','.mts']:
+        return True
+
+    return False
+
+def is_videos(paths):
+    tmp = []
+    for path in paths:
+        if is_video(path):
+            tmp.append(path)
+    return tmp 
