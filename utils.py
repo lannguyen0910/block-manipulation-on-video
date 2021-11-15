@@ -42,3 +42,8 @@ def is_videos(paths):
         if is_video(path):
             tmp.append(path)
     return tmp 
+
+def writelog(path,log):
+    f = open(path,'a+')
+    f.write(log+'\n')
+    f.close()
