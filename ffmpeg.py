@@ -71,3 +71,12 @@ def cut_video(in_path,start_time,last_time,out_path,vcodec='h265'):
         os.system('ffmpeg -ss '+start_time+' -t '+last_time+' -i "'+in_path+'" -vcodec libx264 -b 12M '+out_path)
     elif vcodec == 'h265':
         os.system('ffmpeg -ss '+start_time+' -t '+last_time+' -i "'+in_path+'" -vcodec libx265 -b 12M '+out_path)
+
+def continuous_screenshot(videopath,savedir,fps):
+    '''
+    videopath: input video path
+    savedir:   images will save here
+    fps:       save how many images per second
+    '''
+    videoname = os.path.splitext(os.path.basename(videopath))[0]
+    os.system('ffmpeg -i "'+videopath+'" -vf fps='+str(fps)+' -q:v -0 '+savedir+'/'+videoname+'_%06d.jpg')
