@@ -63,3 +63,11 @@ def video2voice(videopath, voicepath, start_time='00:00:00', last_time='00:00:00
         args += ['-t', last_time]
     args += [voicepath]
     run(args)
+
+def cut_video(in_path,start_time,last_time,out_path,vcodec='h265'):
+    if vcodec == 'copy':
+        os.system('ffmpeg -ss '+start_time+' -t '+last_time+' -i "'+in_path+'" -vcodec copy -acodec copy '+out_path)
+    elif vcodec == 'h264':    
+        os.system('ffmpeg -ss '+start_time+' -t '+last_time+' -i "'+in_path+'" -vcodec libx264 -b 12M '+out_path)
+    elif vcodec == 'h265':
+        os.system('ffmpeg -ss '+start_time+' -t '+last_time+' -i "'+in_path+'" -vcodec libx265 -b 12M '+out_path)
