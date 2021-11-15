@@ -47,3 +47,10 @@ def writelog(path,log):
     f = open(path,'a+')
     f.write(log+'\n')
     f.close()
+
+def makedirs(path):
+    if os.path.isdir(path):
+        print(path,' existed')
+    else:
+        os.makedirs(path)
+        print('Makedir: ',path)
