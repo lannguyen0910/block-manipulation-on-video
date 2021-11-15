@@ -38,3 +38,13 @@ def get_video_infos(videopath):
         height = int(infos['streams'][1]['height'])
 
     return fps,endtime,height,width
+
+def video2image(videopath, imagepath, fps=0, start_time='00:00:00', last_time='00:00:00'):
+    args = ['ffmpeg', '-i', '"'+videopath+'"']
+    if last_time != '00:00:00':
+        args += ['-ss', start_time]
+        args += ['-t', last_time]
+    if fps != 0:
+        args += ['-r', str(fps)]
+    args += ['-f', 'image2','-q:v','-0',imagepath]
+    run(args)
