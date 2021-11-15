@@ -44,8 +44,8 @@ def is_videos(paths):
     return tmp 
 
 def writelog(path,log):
-    f = open(path,'a+')
-    f.write(log+'\n')
+    f = open(path, 'a+')
+    f.write(log + '\n')
     f.close()
 
 def makedirs(path):
@@ -53,9 +53,9 @@ def makedirs(path):
         print(path,' existed')
     else:
         os.makedirs(path)
-        print('Makedir: ',path)
+        print('Makedir: ', path)
 
-def copyfile(src,dst):
+def copyfile(src, dst):
     try:
         shutil.copyfile(src, dst)
     except Exception as e:
