@@ -66,8 +66,8 @@ def clean_tempfiles(tmp_init=True):
         shutil.rmtree('./tmp')
     if tmp_init:
         os.makedirs('./tmp')
-        os.makedirs('./tmp/video_voice')
+        os.makedirs('./tmp/video_voice')    
         os.makedirs('./tmp/music/')
-        os.makedirs('./tmp/video_imgs')
+        os.makedirs('./tmp/video_img')
         os.makedirs('./tmp/vid2img')
-        os.makedirs('./tmp/output_imgs')
+        os.makedirs('./tmp/output_img')
