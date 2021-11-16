@@ -16,13 +16,15 @@ def run(args,mode = 0):
     elif mode == 1:
         cmd = args2cmd(args)
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        sout = p.stdout.readlines()
+        sout = p.communicate()[0]
+        print('Stdout: ', sout)
+        
         return sout
 
 def get_video_infos(videopath):
-    args =  ['ffprobe -v quiet -print_format json -show_format -show_streams', '-i', '"'+videopath+'"']
+    args =  ['ffprobe -v quiet -print_format json -show_format -show_streams', '-i', '"' + videopath + '"']
 
-    out_string = run(args,mode=0)
+    out_string = run(args,mode=1)
 
     infos = json.loads(out_string)
     try:
