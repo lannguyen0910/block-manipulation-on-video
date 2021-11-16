@@ -9,8 +9,8 @@ from config import *
 
 
 if __name__ == "__main__":
-    # ------------------------- Load Blocks -------------------------
     
+    # ------------------------- Load Blocks -------------------------
     pixel_paths = os.listdir(pixel_imgs_dir)
     pixel_paths.sort()
 
@@ -54,6 +54,7 @@ if __name__ == "__main__":
     print('!---------------------- Convert video frame into images of blocks ---------------------!')
     img_names = os.listdir('./tmp/vid2img')
     img_names.sort()
+
     for img_name in img_names:
         img = cv2.imread(os.path.join('./tmp/vid2img', img_name))
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -61,10 +62,12 @@ if __name__ == "__main__":
         
         h, w = img.shape
         out_img = np.zeros((h * pixel_size, w * pixel_size, 3), dtype = np.uint8)
+
         for i in range(h):
             for j in range(w):
                 index = np.clip(img[i, j] // level, 0, len(pixels) - 1)
                 out_img[i * pixel_size:(i + 1) * pixel_size, j * pixel_size:(j+1) * pixel_size] = pixels[index]
+        
         out_img = out_img[:(h * pixel_size // 2) * 2,:(w * pixel_size // 2) * 2]
         cv2.imwrite(os.path.join('./tmp/output_img', img_name), out_img)
 
