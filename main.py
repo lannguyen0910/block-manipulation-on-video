@@ -66,7 +66,7 @@ if __name__ == "__main__":
         for i in range(h):
             for j in range(w):
                 index = np.clip(img[i, j] // level, 0, len(pixels) - 1)
-                out_img[i * pixel_size:(i + 1) * pixel_size, j * pixel_size:(j+1) * pixel_size] = pixels[index]
+                out_img[i * pixel_size:(i + 1) * pixel_size, j * pixel_size:(j + 1) * pixel_size] = pixels[index]
         
         out_img = out_img[:(h * pixel_size // 2) * 2,:(w * pixel_size // 2) * 2]
         cv2.imwrite(os.path.join('./tmp/output_img', img_name), out_img)

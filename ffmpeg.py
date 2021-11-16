@@ -38,7 +38,7 @@ def get_video_infos(videopath):
         width = int(infos['streams'][1]['width'])
         height = int(infos['streams'][1]['height'])
 
-    return fps,endtime,height,width
+    return fps, endtime, height, width
 
 def video2image(videopath, imagepath, fps=0, start_time='00:00:00', last_time='00:00:00'):
     args = ['ffmpeg', '-i', '"'+videopath+'"']
@@ -48,6 +48,7 @@ def video2image(videopath, imagepath, fps=0, start_time='00:00:00', last_time='0
     if fps != 0:
         args += ['-r', str(fps)]
     args += ['-f', 'image2','-q:v','-0',imagepath]
+
     run(args)
 
 def image2video(fps, imagepath, voicepath, videopath):
@@ -63,6 +64,7 @@ def video2voice(videopath, voicepath, start_time='00:00:00', last_time='00:00:00
         args += ['-ss', start_time]
         args += ['-t', last_time]
     args += [voicepath]
+    
     run(args)
 
 def cut_video(in_path,start_time,last_time,out_path,vcodec='h265'):
