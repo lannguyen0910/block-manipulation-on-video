@@ -25,22 +25,24 @@ run.bat
 ```
 
 
-## **Get subprocess stdout**
+## **Convert images from video to images of blocks**
 ```python
 
-def run(args, mode = 0):
-    if mode == 0:
-        cmd = args2cmd(args)
-        os.system(cmd)
-
-    elif mode == 1:
-        cmd = args2cmd(args)
-        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        sout = p.communicate()[0]
-        print('Stdout: ', sout)
+for img_name in img_names:
+        img = cv2.imread(os.path.join('./tmp/vid2img', img_name))
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img = cv2.resize(img, (output_pixel_num, int(output_pixel_num * scale)))
         
-        return sout
+        h, w = img.shape
+        out_img = np.zeros((h * pixel_size, w * pixel_size, 3), dtype = np.uint8)
 
+        for i in range(h):
+            for j in range(w):
+                index = np.clip(img[i, j] // level, 0, len(pixels) - 1)
+                out_img[i * pixel_size:(i + 1) * pixel_size, j * pixel_size:(j + 1) * pixel_size] = pixels[index]
+        
+        out_img = out_img[:(h * pixel_size // 2) * 2,:(w * pixel_size // 2) * 2]
+        cv2.imwrite(os.path.join('./tmp/output_img', img_name), out_img)
 ```
 
 ## **Get video infos**
