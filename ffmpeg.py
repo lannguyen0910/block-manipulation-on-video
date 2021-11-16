@@ -4,11 +4,10 @@ import subprocess
 def args2cmd(args):
     cmd = ''
     for arg in args:
-        cmd += (arg+' ')
+        cmd += (arg + ' ')
     return cmd
 
-def run(args,mode = 0):
-
+def run(args, mode = 0):
     if mode == 0:
         cmd = args2cmd(args)
         os.system(cmd)
@@ -24,7 +23,7 @@ def run(args,mode = 0):
 def get_video_infos(videopath):
     args =  ['ffprobe -v quiet -print_format json -show_format -show_streams', '-i', '"' + videopath + '"']
 
-    out_string = run(args,mode=1)
+    out_string = run(args, mode=1)
 
     infos = json.loads(out_string)
     try:
@@ -51,15 +50,15 @@ def video2image(videopath, imagepath, fps=0, start_time='00:00:00', last_time='0
     args += ['-f', 'image2','-q:v','-0',imagepath]
     run(args)
 
-def image2video(fps,imagepath,voicepath,videopath):
+def image2video(fps, imagepath, voicepath, videopath):
     if voicepath != None:
-        os.system('ffmpeg -y -r '+str(fps)+' -i '+imagepath+' -vcodec libx264 '+'./tmp/video_tmp.mp4')
-        os.system('ffmpeg -i ./tmp/video_tmp.mp4 -i "'+voicepath+'" -vcodec copy -acodec aac '+videopath)
+        os.system('ffmpeg -y -r ' + str(fps) + ' -i ' + imagepath + ' -vcodec libx264 ' + './tmp/video_tmp.mp4')
+        os.system('ffmpeg -i ./tmp/video_tmp.mp4 -i "'+voicepath+'" -vcodec copy -acodec aac ' + videopath)
     else:
-        os.system('ffmpeg -y -r '+str(fps)+' -i '+imagepath+' -vcodec libx264 '+videopath)
+        os.system('ffmpeg -y -r ' + str(fps) + ' -i '+ imagepath + ' -vcodec libx264 ' + videopath)
 
 def video2voice(videopath, voicepath, start_time='00:00:00', last_time='00:00:00'):
-    args = ['ffmpeg', '-i', '"'+videopath+'"','-f mp3','-b:a 320k']
+    args = ['ffmpeg', '-i', '"' + videopath + '"','-f mp3','-b:a 320k']
     if last_time != '00:00:00':
         args += ['-ss', start_time]
         args += ['-t', last_time]
@@ -68,17 +67,17 @@ def video2voice(videopath, voicepath, start_time='00:00:00', last_time='00:00:00
 
 def cut_video(in_path,start_time,last_time,out_path,vcodec='h265'):
     if vcodec == 'copy':
-        os.system('ffmpeg -ss '+start_time+' -t '+last_time+' -i "'+in_path+'" -vcodec copy -acodec copy '+out_path)
+        os.system('ffmpeg -ss ' + start_time + ' -t ' + last_time + ' -i "' + in_path + '" -vcodec copy -acodec copy ' + out_path)
     elif vcodec == 'h264':    
-        os.system('ffmpeg -ss '+start_time+' -t '+last_time+' -i "'+in_path+'" -vcodec libx264 -b 12M '+out_path)
+        os.system('ffmpeg -ss ' + start_time + ' -t ' + last_time + ' -i "' + in_path + '" -vcodec libx264 -b 12M ' + out_path)
     elif vcodec == 'h265':
-        os.system('ffmpeg -ss '+start_time+' -t '+last_time+' -i "'+in_path+'" -vcodec libx265 -b 12M '+out_path)
+        os.system('ffmpeg -ss ' + start_time + ' -t ' + last_time + ' -i "' + in_path + '" -vcodec libx265 -b 12M ' + out_path)
 
-def continuous_screenshot(videopath,savedir,fps):
+def continuous_screenshot(videopath, savedir, fps):
     '''
     videopath: input video path
     savedir:   images will save here
     fps:       save how many images per second
     '''
     videoname = os.path.splitext(os.path.basename(videopath))[0]
-    os.system('ffmpeg -i "'+videopath+'" -vf fps='+str(fps)+' -q:v -0 '+savedir+'/'+videoname+'_%06d.jpg')
+    os.system('ffmpeg -i "' + videopath + '" -vf fps=' + str(fps) + ' -q:v -0 ' + savedir + '/' + videoname + '_%06d.jpg')
