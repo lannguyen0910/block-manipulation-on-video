@@ -7,6 +7,8 @@ https://user-images.githubusercontent.com/47696901/141905787-2bb79845-4493-436d-
   <a style="font-size: 40px; color:red;"> <strong> Turn on sound to listen to the music (Bad Apple) </strong> </a>
 </p>
 
+![gif](./demo/result.gif)
+
 # **Setup and run (Linux)**
 - Python3 and [ffmpeg](http://ffmpeg.org/).
 ```
