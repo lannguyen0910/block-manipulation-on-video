@@ -58,13 +58,13 @@ def image2video(fps, imagepath, voicepath, videopath):
     else:
         os.system('ffmpeg -y -r ' + str(fps) + ' -i '+ imagepath + ' -vcodec libx264 ' + videopath)
 
-def video2voice(videopath, voicepath, start_time='00:00:00', last_time='00:00:00'):
+def video2audio(videopath, voicepath, start_time='00:00:00', last_time='00:00:00'):
     args = ['ffmpeg', '-i', '"' + videopath + '"','-f mp3','-b:a 320k']
     if last_time != '00:00:00':
         args += ['-ss', start_time]
         args += ['-t', last_time]
     args += [voicepath]
-    
+
     run(args)
 
 def cut_video(in_path,start_time,last_time,out_path,vcodec='h265'):

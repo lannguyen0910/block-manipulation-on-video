@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     # Extract audio from video
     print('!------------------------------ Extract audio from video ------------------------------!')
-    ffmpeg.video2voice(video_path, './tmp/tmp.mp3')
+    ffmpeg.video2audio(video_path, './tmp/tmp.mp3')
 
     # Convert video frame into images of blocks
     print('!---------------------- Convert video frame into images of blocks ---------------------!')
