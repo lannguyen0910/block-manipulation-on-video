@@ -4,7 +4,7 @@
 https://user-images.githubusercontent.com/47696901/141905787-2bb79845-4493-436d-a8ef-63137ab5d8b3.mp4
 
 <p align="center">
-  <a style="font-size: 40px; color:red;"> <strong> Turn on sound to listen to the music (Bad Apple) </strong> </a>
+  <a style="font-size: 40px; color:red;"> <strong> Turn on sound to listen to the music (Bad Apple, play on web browser only!) </strong> </a>
 </p>
 
 ![gif](./demo/result.gif)
@@ -25,6 +25,8 @@ pip install requirements.txt
 ```
 run.bat
 ```
+
+- **Notice: The result video cannot play on mobile devices yet. Update in the future!**
 
 
 ## **Convert images from video to images of blocks**
