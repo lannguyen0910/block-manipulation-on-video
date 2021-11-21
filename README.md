@@ -1,4 +1,4 @@
-# <p align="center"> Manipulate blocks on video </p>
+# <p align="center"> Convert video into blocks </p>
 
 
 https://user-images.githubusercontent.com/47696901/141905787-2bb79845-4493-436d-a8ef-63137ab5d8b3.mp4
@@ -33,20 +33,20 @@ run.bat
 ```python
 
 for img_name in img_names:
-        img = cv2.imread(os.path.join('./tmp/vid2img', img_name))
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        img = cv2.resize(img, (output_pixel_num, int(output_pixel_num * scale)))
-        
-        h, w = img.shape
-        out_img = np.zeros((h * pixel_size, w * pixel_size, 3), dtype = np.uint8)
+    img = cv2.imread(os.path.join('./tmp/vid2img', img_name))
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = cv2.resize(img, (output_pixel_num, int(output_pixel_num * scale)))
 
-        for i in range(h):
-            for j in range(w):
-                index = np.clip(img[i, j] // level, 0, len(pixels) - 1)
-                out_img[i * pixel_size:(i + 1) * pixel_size, j * pixel_size:(j + 1) * pixel_size] = pixels[index]
-        
-        out_img = out_img[:(h * pixel_size // 2) * 2,:(w * pixel_size // 2) * 2]
-        cv2.imwrite(os.path.join('./tmp/output_img', img_name), out_img)
+    h, w = img.shape
+    out_img = np.zeros((h * pixel_size, w * pixel_size, 3), dtype = np.uint8)
+
+    for i in range(h):
+        for j in range(w):
+            index = np.clip(img[i, j] // level, 0, len(pixels) - 1)
+            out_img[i * pixel_size:(i + 1) * pixel_size, j * pixel_size:(j + 1) * pixel_size] = pixels[index]
+
+    out_img = out_img[:(h * pixel_size // 2) * 2,:(w * pixel_size // 2) * 2]
+    cv2.imwrite(os.path.join('./tmp/output_img', img_name), out_img)
 ```
 
 ## **Get video infos**
